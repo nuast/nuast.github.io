@@ -1,0 +1,978 @@
+/* =============================================================
+   NUAST Computer Science – Main Stylesheet
+   File: css/style.css
+
+   TABLE OF CONTENTS
+   1.  CSS Custom Properties (variables – easy to change colours)
+   2.  Reset & Base
+   3.  Typography
+   4.  Layout Utilities
+   5.  Skip Link (accessibility)
+   6.  Header & Navigation
+   7.  Hero Section
+   8.  Introduction Section
+   9.  Card Grid (Featured Resources)
+   10. Repository List
+   11. Platforms Grid
+   12. About Section
+   13. Footer
+   14. Responsive / Media Queries
+
+   HOW TO CHANGE COLOURS:
+   ─ Edit the --colour-* variables in section 1 below.
+
+   HOW TO CHANGE THE HERO BACKGROUND:
+   ─ Search for "EDIT: hero background" in section 7.
+
+   HOW TO CHANGE FONTS:
+   ─ Edit the font-family declarations in section 1 or 2.
+================================================================ */
+
+
+/* ============================================================
+   1. CSS CUSTOM PROPERTIES
+   EDIT: Change any colour or spacing value here to update
+   the whole site at once.
+   ============================================================ */
+:root {
+  /* Brand colours */
+  /* EDIT: Primary blue – used for buttons, links, and accents */
+  --colour-primary:      #0057b8;
+  --colour-primary-dark: #003f8a;
+  --colour-primary-light:#e8f0fb;
+
+  /* Accent / highlight */
+  /* EDIT: Accent colour – used for the "CS" wordmark and highlights */
+  --colour-accent: #f5a623;
+
+  /* Text */
+  --colour-text:       #1a1a2e;
+  --colour-text-muted: #555577;
+  --colour-text-on-dark: #ffffff;
+
+  /* Backgrounds */
+  --colour-bg:     #ffffff;
+  --colour-bg-alt: #f4f6fb;
+  --colour-dark:   #0d1b35;
+
+  /* Borders & shadows */
+  --colour-border:  #dde3f0;
+  --shadow-sm: 0 1px 4px rgba(0,0,0,.08);
+  --shadow-md: 0 4px 16px rgba(0,0,0,.10);
+  --shadow-lg: 0 8px 32px rgba(0,0,0,.12);
+
+  /* Typography */
+  /* EDIT: Font stack – replace with a Google Font import if desired */
+  --font-base: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, Courier, monospace;
+
+  /* Spacing */
+  --space-xs:  0.5rem;
+  --space-sm:  1rem;
+  --space-md:  2rem;
+  --space-lg:  4rem;
+  --space-xl:  6rem;
+
+  /* Layout */
+  --max-width:  1200px;
+  --radius-sm:  6px;
+  --radius-md:  12px;
+  --radius-lg:  20px;
+
+  /* Transitions */
+  --transition: 0.2s ease;
+}
+
+
+/* ============================================================
+   2. RESET & BASE
+   ============================================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+body {
+  font-family: var(--font-base);
+  color: var(--colour-text);
+  background: var(--colour-bg);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+img, svg {
+  max-width: 100%;
+  display: block;
+}
+
+a {
+  color: var(--colour-primary);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+
+a:hover,
+a:focus-visible {
+  color: var(--colour-primary-dark);
+  text-decoration: underline;
+}
+
+ul {
+  list-style: none;
+}
+
+/* Focus ring – visible for keyboard / screen-reader users */
+:focus-visible {
+  outline: 3px solid var(--colour-accent);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+
+
+/* ============================================================
+   3. TYPOGRAPHY
+   ============================================================ */
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--colour-text);
+}
+
+h1 { font-size: clamp(1.9rem, 5vw, 3rem); }
+h2 { font-size: clamp(1.5rem, 3.5vw, 2.2rem); }
+h3 { font-size: clamp(1.1rem, 2.5vw, 1.4rem); }
+
+p { margin-bottom: 1rem; }
+
+p:last-child { margin-bottom: 0; }
+
+.accent { color: var(--colour-accent); }
+
+strong { font-weight: 700; }
+
+
+/* ============================================================
+   4. LAYOUT UTILITIES
+   ============================================================ */
+.container {
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: var(--space-md);
+}
+
+/* Narrower container for text-heavy sections */
+.narrow {
+  max-width: 720px;
+}
+
+/* Section padding – top and bottom breathing room */
+.section-pad {
+  padding-block: var(--space-lg);
+}
+
+/* Alternate section background */
+.bg-alt {
+  background: var(--colour-bg-alt);
+}
+
+/* Centre text */
+.center {
+  text-align: center;
+}
+
+/* Section headings */
+.section-title {
+  margin-bottom: var(--space-sm);
+}
+
+/* Section sub-heading / lead paragraph */
+.section-sub {
+  color: var(--colour-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: var(--space-md);
+}
+
+
+/* ============================================================
+   5. SKIP LINK (Accessibility)
+   ============================================================ */
+.skip-link {
+  position: absolute;
+  top: -3rem;
+  left: 1rem;
+  background: var(--colour-primary);
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+  font-weight: 600;
+  z-index: 9999;
+  transition: top 0.2s;
+}
+
+.skip-link:focus {
+  top: 0;
+}
+
+
+/* ============================================================
+   6. HEADER & NAVIGATION
+   ============================================================ */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: var(--colour-dark);
+  box-shadow: var(--shadow-md);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding-block: 0.75rem;
+}
+
+/* Brand / logo */
+.site-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.site-brand:hover .site-name,
+.site-brand:focus-visible .site-name {
+  color: var(--colour-accent);
+  text-decoration: none;
+}
+
+/* EDIT: logo dimensions – adjust width/height as needed */
+.logo-icon {
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+}
+
+/* EDIT: If using an <img> for the logo */
+.logo-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+}
+
+.site-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--colour-text-on-dark);
+  letter-spacing: 0.02em;
+  transition: color var(--transition);
+}
+
+/* Navigation */
+.primary-nav ul {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.primary-nav a {
+  display: block;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: rgba(255,255,255,0.85);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition);
+}
+
+.primary-nav a:hover,
+.primary-nav a:focus-visible {
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* CTA nav button */
+.primary-nav .nav-cta {
+  background: var(--colour-primary);
+  color: #fff;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+}
+
+.primary-nav .nav-cta:hover,
+.primary-nav .nav-cta:focus-visible {
+  background: var(--colour-primary-dark);
+  color: #fff;
+}
+
+/* Hamburger toggle – hidden on desktop */
+.nav-toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  padding: 0.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+}
+
+.hamburger-bar {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: opacity var(--transition);
+}
+
+.nav-toggle:focus-visible {
+  outline: 3px solid var(--colour-accent);
+}
+
+
+/* ============================================================
+   7. HERO SECTION
+   ============================================================ */
+.hero {
+  background: var(--colour-dark);
+  /* EDIT: hero background – change gradient or add an image:
+     background: url('../assets/images/hero-bg.jpg') center/cover no-repeat;
+     For a semi-transparent overlay on top of an image, use:
+     background: linear-gradient(135deg, rgba(13,27,53,.95) 0%, rgba(0,87,184,.8) 100%),
+                 url('../assets/images/hero-bg.jpg') center/cover no-repeat;
+  */
+  background: linear-gradient(135deg, #0d1b35 0%, #0a2a5e 50%, #0d1b35 100%);
+  color: var(--colour-text-on-dark);
+  padding-block: var(--space-xl);
+  overflow: hidden;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: var(--space-lg);
+}
+
+.hero-heading {
+  color: #fff;
+  margin-bottom: var(--space-sm);
+  font-size: clamp(2rem, 5vw, 3.2rem);
+}
+
+.hero-sub {
+  font-size: clamp(1rem, 2.5vw, 1.2rem);
+  color: rgba(255,255,255,0.8);
+  max-width: 520px;
+  margin-bottom: var(--space-md);
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+/* Hero graphic column */
+.hero-graphic {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* EDIT: hero SVG / image dimensions */
+.hero-svg {
+  width: 100%;
+  max-width: 380px;
+  height: auto;
+  filter: drop-shadow(0 8px 24px rgba(0,87,184,.4));
+}
+
+/* EDIT: if you replace SVG with an <img> */
+.hero-image {
+  width: 100%;
+  max-width: 420px;
+  height: auto;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-lg);
+}
+
+
+/* ============================================================
+   8. BUTTONS
+   ============================================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.7rem 1.5rem;
+  border-radius: var(--radius-sm);
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background var(--transition), color var(--transition),
+              box-shadow var(--transition), transform var(--transition);
+  cursor: pointer;
+  text-decoration: none;
+  border: 2px solid transparent;
+}
+
+.btn:focus-visible {
+  outline: 3px solid var(--colour-accent);
+  outline-offset: 3px;
+}
+
+.btn:active {
+  transform: translateY(1px);
+}
+
+/* Primary button */
+.btn-primary {
+  background: var(--colour-primary);
+  color: #fff;
+  border-color: var(--colour-primary);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--colour-primary-dark);
+  border-color: var(--colour-primary-dark);
+  color: #fff;
+  box-shadow: var(--shadow-md);
+  text-decoration: none;
+}
+
+/* Outline button */
+.btn-outline {
+  background: transparent;
+  color: var(--colour-primary);
+  border-color: var(--colour-primary);
+}
+
+.btn-outline:hover,
+.btn-outline:focus-visible {
+  background: var(--colour-primary);
+  color: #fff;
+  text-decoration: none;
+}
+
+/* Outline button on dark background */
+.hero .btn-outline {
+  color: #fff;
+  border-color: rgba(255,255,255,0.6);
+}
+
+.hero .btn-outline:hover,
+.hero .btn-outline:focus-visible {
+  background: rgba(255,255,255,0.15);
+  border-color: #fff;
+  color: #fff;
+}
+
+
+/* ============================================================
+   9. INTRODUCTION SECTION
+   ============================================================ */
+.intro-text {
+  color: var(--colour-text-muted);
+  font-size: 1.05rem;
+  margin-bottom: 1.25rem;
+}
+
+.intro-text a {
+  font-weight: 600;
+}
+
+
+/* ============================================================
+   10. CARD GRID (Featured Resources)
+   ============================================================ */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-md);
+}
+
+.card {
+  background: var(--colour-bg);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition),
+              border-color var(--transition);
+}
+
+.card:hover {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-3px);
+  border-color: var(--colour-primary);
+}
+
+.card-icon {
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.card-title {
+  font-size: 1.1rem;
+  color: var(--colour-text);
+  margin: 0;
+}
+
+.card-desc {
+  color: var(--colour-text-muted);
+  font-size: 0.95rem;
+  flex-grow: 1;
+  margin: 0;
+}
+
+.card-link {
+  display: inline-flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.9rem;
+  color: var(--colour-primary);
+  margin-top: auto;
+  padding-top: 0.5rem;
+  transition: color var(--transition);
+}
+
+.card-link:hover,
+.card-link:focus-visible {
+  color: var(--colour-primary-dark);
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   11. REPOSITORY LIST
+   ============================================================ */
+.repo-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.repo-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+  padding: 1rem 1.25rem;
+  background: var(--colour-bg);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-sm);
+  text-decoration: none;
+  color: var(--colour-text);
+  transition: border-color var(--transition), box-shadow var(--transition),
+              background var(--transition);
+}
+
+.repo-card:hover,
+.repo-card:focus-visible {
+  border-color: var(--colour-primary);
+  box-shadow: var(--shadow-sm);
+  background: var(--colour-primary-light);
+  text-decoration: none;
+  color: var(--colour-text);
+}
+
+.repo-card-body {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  min-width: 0;
+}
+
+.repo-icon {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  color: var(--colour-text-muted);
+}
+
+.repo-card-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  min-width: 0;
+}
+
+.repo-name {
+  font-size: 0.95rem;
+  color: var(--colour-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.repo-desc {
+  font-size: 0.85rem;
+  color: var(--colour-text-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Badges (language / topic tags) */
+.repo-card-badges {
+  display: flex;
+  gap: 0.4rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.65em;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--colour-bg-alt);
+  color: var(--colour-text-muted);
+  border: 1px solid var(--colour-border);
+}
+
+/* EDIT: Language badge colours – add more as needed */
+.badge-python {
+  background: #3572a5;
+  color: #fff;
+  border-color: #3572a5;
+}
+
+.badge-javascript {
+  background: #f1e05a;
+  color: #1a1a2e;
+  border-color: #d4c144;
+}
+
+.badge-html {
+  background: #e34c26;
+  color: #fff;
+  border-color: #e34c26;
+}
+
+.badge-markdown {
+  background: #083fa1;
+  color: #fff;
+  border-color: #083fa1;
+}
+
+
+/* ============================================================
+   12. PLATFORMS GRID
+   ============================================================ */
+.platform-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: var(--space-md);
+}
+
+.platform-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: var(--colour-bg);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-md);
+  text-align: center;
+  text-decoration: none;
+  color: var(--colour-text);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow var(--transition), transform var(--transition),
+              border-color var(--transition);
+}
+
+.platform-card:hover,
+.platform-card:focus-visible {
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+  border-color: var(--colour-primary);
+  text-decoration: none;
+  color: var(--colour-text);
+}
+
+.platform-icon {
+  font-size: 2.25rem;
+  line-height: 1;
+  display: block;
+}
+
+.platform-name {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+
+.platform-desc {
+  font-size: 0.8rem;
+  color: var(--colour-text-muted);
+}
+
+
+/* ============================================================
+   13. ABOUT SECTION
+   ============================================================ */
+.about-inner {
+  display: grid;
+  grid-template-columns: 3fr 2fr;
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+.about-text p {
+  color: var(--colour-text-muted);
+  margin-bottom: 1.25rem;
+}
+
+.about-text .btn {
+  margin-top: 0.5rem;
+}
+
+/* Highlights panel */
+.about-highlights {
+  background: var(--colour-primary-light);
+  border: 1px solid var(--colour-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.highlights-title {
+  font-size: 1rem;
+  color: var(--colour-primary-dark);
+  margin-bottom: var(--space-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.highlights-list li {
+  border-bottom: 1px solid var(--colour-border);
+  padding-block: 0.6rem;
+}
+
+.highlights-list li:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.highlights-list a {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--colour-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.highlights-list a:hover,
+.highlights-list a:focus-visible {
+  color: var(--colour-primary-dark);
+  text-decoration: underline;
+}
+
+
+/* ============================================================
+   14. FOOTER
+   ============================================================ */
+.site-footer {
+  background: var(--colour-dark);
+  color: rgba(255,255,255,0.75);
+  padding-block: var(--space-lg);
+  margin-top: auto;
+}
+
+.footer-inner {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--space-md);
+}
+
+/* Footer brand */
+.footer-logo-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.footer-tagline {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  margin: 0;
+}
+
+/* Footer nav */
+.footer-nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.footer-nav a {
+  color: rgba(255,255,255,0.7);
+  font-size: 0.9rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: var(--radius-sm);
+  transition: color var(--transition), background var(--transition);
+}
+
+.footer-nav a:hover,
+.footer-nav a:focus-visible {
+  color: #fff;
+  background: rgba(255,255,255,0.08);
+  text-decoration: none;
+}
+
+/* Copyright */
+.footer-copy {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.4);
+  margin: 0;
+  text-align: right;
+}
+
+
+/* ============================================================
+   15. RESPONSIVE / MEDIA QUERIES
+   ============================================================ */
+
+/* ── Tablet / smaller desktop ─────────────────────────────── */
+@media (max-width: 900px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
+
+  .hero-graphic {
+    order: -1; /* move illustration above text */
+    max-height: 200px;
+    overflow: hidden;
+  }
+
+  .hero-svg {
+    max-width: 260px;
+  }
+
+  .hero-actions {
+    justify-content: center;
+  }
+
+  .about-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-inner {
+    grid-template-columns: 1fr;
+    text-align: center;
+    gap: var(--space-sm);
+  }
+
+  .footer-copy {
+    text-align: center;
+  }
+
+  .repo-card-badges {
+    display: none; /* hide badges on narrow screens to save space */
+  }
+}
+
+/* ── Mobile ────────────────────────────────────────────────── */
+@media (max-width: 640px) {
+  :root {
+    --space-lg: 3rem;
+    --space-xl: 4rem;
+  }
+
+  .container {
+    padding-inline: var(--space-sm);
+  }
+
+  /* Show hamburger, hide full nav */
+  .nav-toggle {
+    display: flex;
+  }
+
+  .primary-nav {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--colour-dark);
+    padding: var(--space-sm);
+    box-shadow: var(--shadow-md);
+    z-index: 99;
+  }
+
+  /* Nav open state – toggled by JS */
+  .primary-nav.is-open {
+    display: block;
+  }
+
+  .primary-nav ul {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .primary-nav a {
+    padding: 0.6rem 0.75rem;
+    font-size: 1rem;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .platform-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .repo-card {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-graphic {
+    display: none; /* hide illustration on small phones */
+  }
+
+  .hero-sub {
+    margin-inline: auto;
+  }
+}
+
+/* ── Very small screens ────────────────────────────────────── */
+@media (max-width: 360px) {
+  .platform-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ── Reduced motion preference ─────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
