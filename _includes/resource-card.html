@@ -1,0 +1,16 @@
+<article class="resource-card">
+  <div class="resource-top">
+    <span class="resource-icon" aria-hidden="true">{{ resource.icon }}</span>
+    <span class="stage-tag">{{ resource.stage }}</span>
+  </div>
+  <h3>{{ resource.title }}</h3>
+  <p>{{ resource.description }}</p>
+  <p class="resource-subject">{{ resource.subject }}</p>
+  <div class="resource-links">
+    <a href="{{ resource.repo_url }}" target="_blank" rel="noopener noreferrer">Repository</a>
+    <a href="{{ resource.readme_url }}" target="_blank" rel="noopener noreferrer">README</a>
+    {% if resource.docs_url and resource.docs_url != '' %}
+      <a href="{{ resource.docs_url }}" target="_blank" rel="noopener noreferrer">Docs</a>
+    {% endif %}
+  </div>
+</article>
