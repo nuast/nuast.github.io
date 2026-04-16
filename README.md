@@ -1,141 +1,85 @@
-# nuast.github.io
+# NUAST Curriculum Hub (`nuast.github.io`)
 
-> **NUAST Computer Science** – GitHub Pages homepage for the NUAST GitHub organisation.  
-> This site acts as a gateway to student resources and repositories in the [`nuast-dev`](https://github.com/nuast-dev) organisation.
+A GitHub Pages site for NUAST curriculum resources, designed for students, staff, and parents.
 
----
+## Site purpose
 
-## 📁 Folder Structure
+This site is a clean landing page for NUAST curriculum repositories, with a focus on:
 
-```
-nuast.github.io/
-├── index.html          ← Main homepage (edit content here)
-├── css/
-│   └── style.css       ← All styles (edit colours, fonts, layout here)
-├── js/
-│   └── main.js         ← Minimal JavaScript (mobile nav + footer year)
+- six core curriculum repositories
+- browsing by Key Stage (KS3 / KS4 / KS5)
+- quick access to featured resources
+
+## Folder tree
+
+```text
+.
+├── _config.yml
+├── _data/
+│   └── resources.yml
+├── _includes/
+│   ├── footer.html
+│   ├── nav.html
+│   └── resource-card.html
+├── _layouts/
+│   ├── default.html
+│   └── page.html
+├── about.md
 ├── assets/
-│   └── images/         ← Put school logo and images here
-└── README.md           ← This file
+│   ├── css/
+│   │   └── site.css
+│   ├── img/
+│   │   ├── favicon-16x16.png
+│   │   ├── favicon-32x32.png
+│   │   ├── hero/
+│   │   ├── icons/
+│   │   ├── logo/
+│   │   │   ├── nuast-logo-github.svg
+│   │   │   └── nuast-logo.svg
+│   │   ├── nuast-logo-github.svg
+│   │   ├── nuast-logo.png
+│   │   └── nuast-logo.svg
+│   └── js/
+│       └── site.js
+├── index.md
+└── resources.md
 ```
 
----
+## Update curriculum resource links
 
-## 🚀 Publishing with GitHub Pages
+Edit only this file:
 
-1. Go to **Settings → Pages** in this repository.
-2. Under **Source**, select **Deploy from a branch**.
-3. Choose the `main` branch and `/ (root)` folder.
-4. Click **Save**.
-5. Your site will be live at `https://nuast.github.io` within a minute or two.
+- `_data/resources.yml`
 
-> **Tip:** Any time you push a change to the `main` branch the site updates automatically.
+Each repository entry includes:
 
----
+- `title`
+- `stage`
+- `subject`
+- `description`
+- `repo_name`
+- `repo_url`
+- `readme_url`
+- `docs_url`
+- `featured`
+- `icon`
 
-## ✏️ How to Edit the Homepage
+Pages will update automatically from this data source.
 
-All editable areas in `index.html` are marked with an `<!-- EDIT: ... -->` comment.  
-Below is a quick reference for the most common changes.
+## Replace images and logos
 
-### Change the school logo
+- Main logo: `assets/img/logo/nuast-logo.svg`
+- Optional extra logos: `assets/img/logo/`
+- Add hero assets to: `assets/img/hero/`
+- Add icon assets to: `assets/img/icons/`
 
-1. Save your logo file in `assets/images/`, e.g. `nuast-logo.png`.
-2. In `index.html`, find the comment `<!-- EDIT: Replace the placeholder SVG with an <img> tag -->`.
-3. Replace the `<svg>` placeholder with:
+If logo filename/path changes, update `_includes/nav.html`.
 
-   ```html
-   <img src="assets/images/nuast-logo.png" alt="NUAST logo" class="logo-img" />
-   ```
+## Publish with GitHub Pages
 
-### Change the welcome text
+1. Go to **Repository Settings → Pages**.
+2. Under **Build and deployment**, select **Source: Deploy from a branch**.
+3. Select branch: `main` and folder: `/ (root)`.
+4. Save.
 
-In `index.html`, find the `<!-- EDIT: Main headline -->` and `<!-- EDIT: Sub-heading -->` comments inside the `.hero` section and update the text.
-
-### Change the hero background image
-
-1. Save your image in `assets/images/`, e.g. `hero-bg.jpg`.
-2. In `css/style.css`, find the comment `/* EDIT: hero background */`.
-3. Update the `background` property of `.hero` to:
-
-   ```css
-   background: linear-gradient(135deg, rgba(13,27,53,.9) 0%, rgba(0,87,184,.7) 100%),
-               url('../assets/images/hero-bg.jpg') center/cover no-repeat;
-   ```
-
-### Add or change a resource card
-
-In `index.html`, find the **Featured Student Resources** section (look for `id="resources"`).  
-Copy an existing `<article class="card">` block, paste it inside `.card-grid`, and update:
-
-- The `aria-label` on `<article>`
-- The emoji in `<div class="card-icon">`
-- The text in `<h3 class="card-title">`
-- The text in `<p class="card-desc">`
-- The `href` and link text in `<a class="card-link">`
-
-### Add or change a repository link
-
-In `index.html`, find the **Key Repositories** section (look for `id="repositories"`).  
-Copy an existing `<a class="repo-card">` block and update:
-
-- The `href` with the real GitHub URL
-- The `aria-label`
-- The `<span class="repo-name">` text (organisation / **repo-name**)
-- The `<span class="repo-desc">` text (short description)
-- The `<span class="badge">` elements (language / topic tags)
-
-Available badge colours: `badge-python`, `badge-javascript`, `badge-html`, `badge-markdown`.  
-To add a new colour, define `.badge-yourname` in `css/style.css`.
-
-### Add or change a platform link
-
-In `index.html`, find the **Useful Platforms** section (look for `id="platforms"`).  
-Copy an existing `<a class="platform-card">` block and update the `href`, emoji icon, name, and description.
-
-### Change footer links
-
-In `index.html`, find the `<!-- EDIT: footer links -->` comment inside `<footer>` and update the `<li>` items in `.footer-nav`.
-
-### Change site colours
-
-Open `css/style.css` and edit the **CSS custom properties** near the top of the file (inside `:root { ... }`):
-
-| Variable | Default | Purpose |
-|---|---|---|
-| `--colour-primary` | `#0057b8` | Buttons, links, accents |
-| `--colour-accent` | `#f5a623` | Highlight colour, "CS" wordmark |
-| `--colour-dark` | `#0d1b35` | Header and footer background |
-| `--colour-bg-alt` | `#f4f6fb` | Alternate section background |
-
----
-
-## 🗂️ Adding a New Page
-
-1. Create a new `.html` file in the root folder (e.g. `year12.html`).
-2. Copy the `<head>`, `<header>`, and `<footer>` from `index.html`.
-3. Add your content inside `<main>`.
-4. Add a link to the new page in the nav and footer of `index.html`.
-
----
-
-## ♿ Accessibility Notes
-
-- All interactive elements have visible focus rings.
-- Images should have meaningful `alt` text.
-- The colour contrast meets WCAG AA for normal text.
-- The page has a skip link for keyboard navigation.
-
----
-
-## 🔗 Key Links
-
-| Link | URL |
-|---|---|
-| NUAST organisation | <https://github.com/nuast> |
-| nuast-dev organisation | <https://github.com/nuast-dev> |
-| GitHub Pages docs | <https://docs.github.com/en/pages> |
-
----
-
-*Maintained by the NUAST Computer Science Department.*
+GitHub Pages will build the Jekyll site automatically on push.

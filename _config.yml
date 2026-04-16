@@ -1,0 +1,7 @@
+title: NUAST Curriculum Hub
+description: Curriculum resources for NUAST students, staff, and parents.
+url: https://nuast.github.io
+baseurl: ""
+markdown: kramdown
+permalink: pretty
+collections: {}

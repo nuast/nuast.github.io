@@ -1,0 +1,71 @@
+- key: ks3
+  title: Key Stage 3
+  stage: KS3
+  subject: Computing
+  description: Foundation computing and digital literacy resources for Key Stage 3 learners.
+  repo_name: nuast/ks3
+  repo_url: https://github.com/nuast/ks3
+  readme_url: https://github.com/nuast/ks3#readme
+  docs_url: ""
+  featured: true
+  icon: 🧩
+
+- key: ks4-cs
+  title: Key Stage 4 Computer Science
+  stage: KS4
+  subject: Computer Science
+  description: GCSE Computer Science curriculum materials, tasks, and classroom-ready resources.
+  repo_name: nuast/ks4-cs
+  repo_url: https://github.com/nuast/ks4-cs
+  readme_url: https://github.com/nuast/ks4-cs#readme
+  docs_url: ""
+  featured: true
+  icon: 💻
+
+- key: ks4-imedia
+  title: Key Stage 4 Creative iMedia
+  stage: KS4
+  subject: Creative iMedia
+  description: Creative iMedia coursework support, briefs, and production-focused resources.
+  repo_name: nuast/ks4-imedia
+  repo_url: https://github.com/nuast/ks4-imedia
+  readme_url: https://github.com/nuast/ks4-imedia#readme
+  docs_url: ""
+  featured: false
+  icon: 🎨
+
+- key: ks5-cs
+  title: Key Stage 5 Computer Science
+  stage: KS5
+  subject: Computer Science
+  description: A-Level Computer Science content for theory, programming, and exam preparation.
+  repo_name: nuast/ks5-cs
+  repo_url: https://github.com/nuast/ks5-cs
+  readme_url: https://github.com/nuast/ks5-cs#readme
+  docs_url: ""
+  featured: true
+  icon: 🧠
+
+- key: ks5-python
+  title: Key Stage 5 Python
+  stage: KS5
+  subject: Python
+  description: Python-focused Key Stage 5 resources for core programming and applied projects.
+  repo_name: nuast/ks5-python
+  repo_url: https://github.com/nuast/ks5-python
+  readme_url: https://github.com/nuast/ks5-python#readme
+  docs_url: ""
+  featured: false
+  icon: 🐍
+
+- key: ks5-nea
+  title: Key Stage 5 NEA
+  stage: KS5
+  subject: NEA
+  description: Structured guidance and templates to support planning and delivery of the KS5 NEA.
+  repo_name: nuast/ks5-nea
+  repo_url: https://github.com/nuast/ks5-nea
+  readme_url: https://github.com/nuast/ks5-nea#readme
+  docs_url: ""
+  featured: false
+  icon: 📘
